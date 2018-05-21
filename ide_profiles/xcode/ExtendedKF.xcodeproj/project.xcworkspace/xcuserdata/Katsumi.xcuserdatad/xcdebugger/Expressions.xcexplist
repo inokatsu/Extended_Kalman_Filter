@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "FusionEKF::ProcessMeasurement(MeasurementPackage const&amp;):FusionEKF.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "KalmanFilter::Update(Eigen::Matrix&lt;double, -1, 1, 0, -1, 1&gt; const&amp;):kalman_filter.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "this.view.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
