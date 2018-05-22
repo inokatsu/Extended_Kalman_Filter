@@ -15,12 +15,12 @@ FusionEKF::FusionEKF() {
   is_initialized_ = false;
 
   previous_timestamp_ = 0;
-
+  
   // initializing matrices
   R_laser_ = MatrixXd(2, 2);
   R_radar_ = MatrixXd(3, 3);
   H_laser_ = MatrixXd(2, 4);
-  Hj_ = MatrixXd(3, 4);
+//  Hj_ = MatrixXd(3, 4);
 
   //measurement covariance matrix - laser
   R_laser_ << 0.0225, 0,
@@ -62,7 +62,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     // first measurement
     //cout << "EKF: " << endl;
     ekf_.x_ = VectorXd(4);
-    ekf_.x_ << 1, 1, 1, 1;
+    //ekf_.x_ << 1, 1, 1, 1;
     
     //Initial state covariance matrix
     ekf_.P_ = MatrixXd(4,4);
@@ -93,8 +93,9 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
       ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
     }
-
+    
     // done initializing, no need to predict or update
+    previous_timestamp_ = measurement_pack.timestamp_;
     is_initialized_ = true;
     return;
   }
@@ -124,14 +125,14 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   
   //the initial transition matrix F_
   ekf_.F_ = MatrixXd(4, 4);
-  ekf_.F_ << 1, 0, 1, 0,
-             0, 1, 0, 1,
+  ekf_.F_ << 1, 0, dt, 0,
+             0, 1, 0, dt,
              0, 0, 1, 0,
              0, 0, 0, 1;
   
   //Modify the F matrix so that the time is integrated
-  ekf_.F_(0, 2) = dt;
-  ekf_.F_(1, 3) = dt;
+//  ekf_.F_(0, 2) = dt;
+//  ekf_.F_(1, 3) = dt;
   
   
   //set the process covariance matrix Q
