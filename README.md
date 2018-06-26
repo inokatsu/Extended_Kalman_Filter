@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Extended Kalman Filter Project 
 
 [//]: # (Image References)
